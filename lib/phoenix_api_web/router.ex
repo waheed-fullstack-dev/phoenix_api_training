@@ -22,12 +22,13 @@ defmodule PhoenixApiWeb.Router do
     pipe_through :api
 
     post "/user/sign_in", UserController, :sign_in
+    post "/users", UserController, :create
   end
 
   scope "/api", PhoenixApiWeb do
     pipe_through [:api, :authenticated]
 
-    resources "/users", UserController, except: [:new, :edit]
+    get "/users", UserController, :index
   end
 
   # Enable Swoosh mailbox preview in development
